@@ -1,0 +1,59 @@
+<form #registerForm="ngForm" (ngSubmit)="register()" autocomplete="off">
+  <h2 class="text-center text-primary">Create A Staff Here</h2>
+  <hr>
+
+  <div class="mb-3 form-floating">
+    <input
+        type="text"
+        class="form-control"
+        name="fullName"
+        [(ngModel)]="model.fullName"
+        placeholder="Full Name"
+        required
+    >
+    <label>Full Name</label>
+  </div>
+
+  <div class="mb-3 form-floating">
+      <input
+          type="text"
+          class="form-control"
+          name="username"
+          [(ngModel)]="model.username"
+          placeholder="Username"
+          required
+      >
+      <label>Username</label>
+  </div>
+
+  <div class="mb-3 form-floating">
+      <input
+          type="password"
+          class="form-control"
+          name="password"
+          [(ngModel)]="model.password"
+          placeholder="Password"
+          required
+          minlength="8"
+          maxlength="12"
+      >
+      <label>Password</label>
+  </div>
+
+  <div class="mb-3 form-floating">
+      <input
+          type="text"
+          class="form-control"
+          name="jointYearMonth"
+          [(ngModel)]="model.jointYearMonth"
+          placeholder="Join Year Month"
+          required
+      >
+      <label>Join Year and Month</label>
+  </div>
+
+  <div class="form-group text-center">
+      <button class="btn btn-success me-2" type="submit">Register</button>
+      <button class="btn btn-default me-2" (click)="cancel()" type="button">Cancel</button>
+  </div>
+</form>

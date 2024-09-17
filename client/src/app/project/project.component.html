@@ -1,0 +1,81 @@
+<div class="container mt-5">
+  <h2 class="text-center">Projects List</h2>
+
+  <div class="mb-3">
+    <button class="btn btn-primary" (click)="createProject()">Create New Project</button>
+  </div>
+
+  <table class="table table-bordered table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Detail</th>
+        <th>Web Hosted Details</th>
+        <th>Database Details</th>
+        <th>Main Developer</th>
+        <th>Support Developers</th>
+        <th>Azure DevOps Details</th>
+        <th>Code Location in VM</th>
+        <th>Linked Projects</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let project of projects">
+        <td>{{ project.id }}</td>
+
+        <td *ngIf="editingProjectId === project.id">
+          <input type="text" class="form-control" [(ngModel)]="project.name">
+        </td>
+        <td *ngIf="editingProjectId === project.id">
+          <input type="text" class="form-control" [(ngModel)]="project.detail">
+        </td>
+        <td *ngIf="editingProjectId === project.id">
+          <input type="text" class="form-control" [(ngModel)]="project.webHostedDetails">
+        </td>
+        <td *ngIf="editingProjectId === project.id">
+          <input type="text" class="form-control" [(ngModel)]="project.databaseDetails">
+        </td>
+        <td *ngIf="editingProjectId === project.id">
+          <input type="text" class="form-control" [(ngModel)]="project.mainDeveloper">
+        </td>
+        <td *ngIf="editingProjectId === project.id">
+          <input type="text" class="form-control" [(ngModel)]="project.supportDevelopers">
+        </td>
+        <td *ngIf="editingProjectId === project.id">
+          <input type="text" class="form-control" [(ngModel)]="project.azureDevopsDetails">
+        </td>
+        <td *ngIf="editingProjectId === project.id">
+          <input type="text" class="form-control" [(ngModel)]="project.codeLocationInVM">
+        </td>
+        <td *ngIf="editingProjectId === project.id">
+          <input type="text" class="form-control" [(ngModel)]="project.linkedProjects">
+        </td>
+
+        <td *ngIf="editingProjectId !== project.id">{{ project.name }}</td>
+        <td *ngIf="editingProjectId !== project.id">{{ project.detail }}</td>
+        <td *ngIf="editingProjectId !== project.id">{{ project.webHostedDetails }}</td>
+        <td *ngIf="editingProjectId !== project.id">{{ project.databaseDetails }}</td>
+        <td *ngIf="editingProjectId !== project.id">{{ project.mainDeveloper }}</td>
+        <td *ngIf="editingProjectId !== project.id">{{ project.supportDevelopers }}</td>
+        <td *ngIf="editingProjectId !== project.id">{{ project.azureDevopsDetails }}</td>
+        <td *ngIf="editingProjectId !== project.id">{{ project.codeLocationInVM }}</td>
+        <td *ngIf="editingProjectId !== project.id">{{ project.linkedProjects }}</td>
+
+        <td>
+          <button *ngIf="editingProjectId === project.id" class="btn btn-success me-2" (click)="saveProject(project)">Save</button>
+          <button *ngIf="editingProjectId === project.id" class="btn btn-secondary" (click)="cancelEdit()">Cancel</button>
+
+          <button *ngIf="editingProjectId !== project.id" class="btn btn-warning me-2" (click)="editProject(project.id)">Edit</button>
+          <button class="btn btn-danger" (click)="deleteProject(project.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <div *ngIf="projects.length === 0" class="alert alert-info text-center">
+    No projects available.
+  </div>
+</div>

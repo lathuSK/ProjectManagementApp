@@ -1,0 +1,66 @@
+<div class="container">
+    <h2 class="text-center">Sprint Management</h2>
+    <button class="btn btn-primary" (click)="createSprint()">Create New Sprint</button>
+
+    <table class="table mt-4">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Details</th>
+          <th>Document Name</th>
+          <th>Allocated Days</th>
+          <th>Expected Date</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Approved By</th>
+          <th>Allocated To</th>
+          <th>Tested By</th>
+          <th>Is Completed</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sprint of sprints">
+          <ng-container *ngIf="editingSprintId === sprint.id; else viewMode">
+            <td><input [(ngModel)]="sprint.sprintName" class="form-control"></td>
+            <td><input [(ngModel)]="sprint.sprintDetails" class="form-control"></td>
+            <td><input [(ngModel)]="sprint.sprintDocumentName" class="form-control"></td>
+            <td><input type="number" [(ngModel)]="sprint.allocatedDays" class="form-control"></td>
+            <td><input type="date" [(ngModel)]="sprint.expectDate" class="form-control"></td>
+            <td><input type="date" [(ngModel)]="sprint.startDate" class="form-control"></td>
+            <td><input type="date" [(ngModel)]="sprint.endDate" class="form-control"></td>
+            <td><input type="number" [(ngModel)]="sprint.approvedBy" class="form-control"></td>
+            <td><input type="number" [(ngModel)]="sprint.allocatedTo" class="form-control"></td>
+            <td><input type="number" [(ngModel)]="sprint.testedBy" class="form-control"></td>
+            <td>
+              <input type="checkbox" [(ngModel)]="sprint.isCompleted" class="form-check-input">
+            </td>
+            <td>
+              <button class="btn btn-success" (click)="saveSprint(sprint)">Save</button>
+              <button class="btn btn-secondary" (click)="cancelEdit()">Cancel</button>
+            </td>
+          </ng-container>
+          <ng-template #viewMode>
+            <td>{{ sprint.sprintName }}</td>
+            <td>{{ sprint.sprintDetails }}</td>
+            <td>{{ sprint.sprintDocumentName }}</td>
+            <td>{{ sprint.allocatedDays }}</td>
+            <td>{{ sprint.expectDate | date }}</td>
+            <td>{{ sprint.startDate | date }}</td>
+            <td>{{ sprint.endDate | date }}</td>
+            <td>{{ sprint.approvedBy }}</td>
+            <td>{{ sprint.allocatedTo }}</td>
+            <td>{{ sprint.testedBy }}</td>
+            <td>
+              <input type="checkbox" [checked]="sprint.isCompleted" disabled class="form-check-input">
+            </td>
+            <td>
+              <button class="btn btn-warning" (click)="editSprint(sprint.id)">Edit</button>
+              <button class="btn btn-danger" (click)="deleteSprint(sprint.id)">Delete</button>
+            </td>
+          </ng-template>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
